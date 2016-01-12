@@ -17,9 +17,11 @@ module.exports = {
                 queryStr += `${i}=${queries[i]}&`
             }
             queryStr = queryStr.substr(0,queryStr.length - 1)
+        } else {
+            queries = " "
         }
         for(let n in appRoutes) {
-            pageHTML = pageHTML.replace(`href="${appRoutes[n].route}"`,`href="${appRoutes[n].filename+appRoutes[n].query}${queryStr}"`)
+            pageHTML = pageHTML.replace(`href="${appRoutes[n].route}"`,`href="${appRoutes[n].filename+(appRoutes[n].query ? appRoutes[n].query : "")}${queryStr}"`)
 //             console.log(pageHTML,` href="${appRoutes[n].route}"`,`href="${appRoutes[n].filename}${queryStr}"`)   
         }
         return document.body.innerHTML = pageHTML

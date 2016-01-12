@@ -11,11 +11,21 @@
     console.log(math.max(1,2,3,4))
     console.log(math.min(4,3,2,1))
     console.log(math.diff(50,202))
-    
+    var now = new Date()
+    now = now.toString().replace(/\s/g,'-').split(':')[0]
     router.applyRoutes([
         {
             route: '/',
-            filename: 'index.html',
-            query: '?token=0ao3jr8923hf'
+            filename: 'index.html'
+        },
+        {
+            route: '/about',
+            filename: 'about.html',
+            query: `?camp=educate&refer=${url.domain()}`
+        },
+        {
+            route: '/contact',
+            filename: 'contact.php',
+            query: `?&camp=educate&refer=${url.domain()}&time=${now}`
         }
     ])

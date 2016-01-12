@@ -57,12 +57,22 @@
 	    console.log(math.max(1,2,3,4))
 	    console.log(math.min(4,3,2,1))
 	    console.log(math.diff(50,202))
-	    
+	    var now = new Date()
+	    now = now.toString().replace(/\s/g,'-').split(':')[0]
 	    router.applyRoutes([
 	        {
 	            route: '/',
-	            filename: 'index.html',
-	            query: '?token=0ao3jr8923hf'
+	            filename: 'index.html'
+	        },
+	        {
+	            route: '/about',
+	            filename: 'about.html',
+	            query: `?camp=educate&refer=${url.domain()}`
+	        },
+	        {
+	            route: '/contact',
+	            filename: 'contact.php',
+	            query: `?&camp=educate&refer=${url.domain()}&time=${now}`
 	        }
 	    ])
 
@@ -85,7 +95,7 @@
 /***/ function(module, exports) {
 
 	'use strict'; // router module
-	module.exports={config:[{route:'/',filename:'index.html'}],acceptedFileExt:['html'],applyRoutes:function applyRoutes(appRoutes,queries){var pageHTML=document.body.innerHTML;var queryStr="";if(queries){queryStr="?";for(var i in queries){queryStr+=i+'='+queries[i]+'&';}queryStr=queryStr.substr(0,queryStr.length-1);}for(var n in appRoutes){pageHTML=pageHTML.replace('href="'+appRoutes[n].route+'"','href="'+(appRoutes[n].filename+appRoutes[n].query)+queryStr+'"'); //             console.log(pageHTML,` href="${appRoutes[n].route}"`,`href="${appRoutes[n].filename}${queryStr}"`)   
+	module.exports={config:[{route:'/',filename:'index.html'}],acceptedFileExt:['html'],applyRoutes:function applyRoutes(appRoutes,queries){var pageHTML=document.body.innerHTML;var queryStr="";if(queries){queryStr="?";for(var i in queries){queryStr+=i+'='+queries[i]+'&';}queryStr=queryStr.substr(0,queryStr.length-1);}else {queries=" ";}for(var n in appRoutes){pageHTML=pageHTML.replace('href="'+appRoutes[n].route+'"','href="'+(appRoutes[n].filename+(appRoutes[n].query?appRoutes[n].query:""))+queryStr+'"'); //             console.log(pageHTML,` href="${appRoutes[n].route}"`,`href="${appRoutes[n].filename}${queryStr}"`)   
 	}return document.body.innerHTML=pageHTML;}};
 
 /***/ }
